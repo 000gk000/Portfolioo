@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const Register = ()=>{
 
@@ -10,6 +11,7 @@ const[user,setUser] = useState({
     password:''
 
 })
+const navigate = useNavigate();
 
 // handling the input value 
 const handleInput = (e) =>{
@@ -34,85 +36,94 @@ const handleInput = (e) =>{
         },
         body:JSON.stringify(user),
     })
+    if(response.ok){
+        setUser({
+    username:'',
+    email:'',
+    phone:'',
+    password:''
+
+        })
+        navigate('/login')
+    }
     console.log(response)
  } catch (error) {
     console.log('register',error);
  }
     
-
 }
 
     return(
         <>
-         <div className="flex justify-between items-center">
-            <div>
-                 <img src="/images/login.png" className="w-1/2 h-1/2 m-20"></img>
-            </div>
-            <div className="w-1/2 border-2 border-solid border-black px-10 py-10 mr-20" >
-                <h1 className="text-center">Registration form</h1>
-                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="username">username</label><br></br>
-                        <input className="border-2 border-solid border-black"
-                         type = "text"
-                         name="username"
-                         placeholder="username"
-                         id="username"
-                         required
-                         autoComplete="off"
-                         value={user.username}
-                         onChange={handleInput}
-                        />
-                        </div>
-                        <div>
-                        <label htmlFor="email">email</label><br></br>
-                        <input className="border-2 border-solid border-black"
-                         type = "text"
-                         name="email"
-                         placeholder="enter your email"
-                         id="email"
-                         required
-                         autoComplete="off"
-                         value={user.email}
-                         onChange={handleInput}
-                        />
-                        </div>
-                        <div>
-                        <label htmlFor="phone">phone</label><br></br>
-                        <input className="border-2 border-solid border-black"
-                         type = "number"
-                         name="phone"
-                         placeholder="enter phone no."
-                         id="phone"
-                         required
-                         autoComplete="off"
-                         value={user.phone}
-                         onChange={handleInput}
-                        />
-                        </div>
-                        <div >
-                        <label htmlFor="password">password</label><br></br>
-                        <input className="border-2 border-solid border-black"
-                         type = "password"
-                         name="password"
-                         placeholder="password"
-                         id="password"
-                         required
-                         autoComplete="off"
-                         value={user.password}
-                         onChange={handleInput}
-                        />
-                        </div>
-                        <button type="submit" className="border-2 border-solid border-black ">Register now  </button>
-                       
+  <div className="flex justify-between items-center">
+    <div>
+      <img src="/images/login.png" className=" m-20" alt="Login Image" />
+    </div>
+    <div className="w-1/2 px-10 py-10 mr-20">
+      <h1 className="text-center text-3xl font-bold mb-8">Registration Form</h1>
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-md max-w-md mx-auto text-white">
+        <div className="mb-6">
+          <label htmlFor="username" className="block text-sm font-medium">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            required
+            autoComplete="off"
+            value={user.username}
+            onChange={handleInput}
+            className="w-full px-3 py-2 bg-gray-700 border border-solid border-gray-600 rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="email" className="block text-sm font-medium">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+            autoComplete="off"
+            value={user.email}
+            onChange={handleInput}
+            className="w-full px-3 py-2 bg-gray-700 border border-solid border-gray-600 rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="phone" className="block text-sm font-medium">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            placeholder="Enter phone number"
+            required
+            autoComplete="off"
+            value={user.phone}
+            onChange={handleInput}
+            className="w-full px-3 py-2 bg-gray-700 border border-solid border-gray-600 rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-sm font-medium">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+            autoComplete="off"
+            value={user.password}
+            onChange={handleInput}
+            className="w-full px-3 py-2 bg-gray-700 border border-solid border-gray-600 rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">Register Now</button>
+      </form>
+    </div>
+  </div>
+</>
 
-                    
-                 </form>
-                 
-            </div>
-            
-        </div> 
-        </>
     )
 }
 

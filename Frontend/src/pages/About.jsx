@@ -1,7 +1,9 @@
+//import { motion } from "framer-motion"
+
 const About = () =>{
     return (
         <>
-             about page 
+             gopal
         </>
     )
 }
